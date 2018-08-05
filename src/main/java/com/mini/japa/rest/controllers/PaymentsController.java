@@ -1,4 +1,4 @@
-package com.mini.paytm.rest.controllers;
+package com.mini.japa.rest.controllers;
 
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mini.paytm.db.operators.PaymentOperator;
+import com.mini.japa.db.operators.PaymentOperator;
 
 @RestController
 public class PaymentsController {

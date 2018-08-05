@@ -1,4 +1,4 @@
-package com.mini.paytm.db.operators;
+package com.mini.japa.db.operators;
 
 
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package com.mini.paytm.rest.controllers;
+package com.mini.japa.rest.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -1,4 +1,4 @@
-package com.mini.paytm.bootapp;
+package com.mini.japa.bootapp;
 
 import java.util.Arrays;
 
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 //@Configuration
-@ComponentScan({ "com.mini.paytm.rest.controllers"})// "com.mini.paytm.configuration" })
+@ComponentScan({ "com.mini.japa.rest.controllers"})// "com.mini.paytm.configuration" })
 //@EnableAutoConfiguration
 @SpringBootApplication
 public class App {
