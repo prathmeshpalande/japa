@@ -1,4 +1,4 @@
-package com.mini.paytm.rest.controllers;
+package com.mini.japa.rest.controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mini.paytm.db.operators.PassbookOperator;
+import com.mini.japa.db.operators.PassbookOperator;
 
 @RestController
 public class PassbookController {
