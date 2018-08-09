@@ -1,12 +1,15 @@
 package com.mini.japa.rest.controllers;
 
+import java.util.Map;
+
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mini.japa.db.operators.UserOperator;
+import com.mini.japa.db.operators.ClickStreamOperator;
+import com.mini.japa.utils.JSONUtil;
 
 @RestController
 public class ClickStreamController {
@@ -16,16 +19,13 @@ public class ClickStreamController {
 		
 		JSONObject jsonObject = new JSONObject(requestBody);
 		
-		String name = jsonObject.getString("name");
-		String aadhaar = jsonObject.getString("aadhaar");
-		String email = jsonObject.getString("email");
-		String password = jsonObject.getString("password");
 		String phone = jsonObject.getString("phone");
-		String dob = jsonObject.getString("dob");
+		JSONObject streamJSONObject = jsonObject.getJSONObject("stream");
 		
-		UserOperator userOperator = new UserOperator();
+		Map<String, Object> streamMap = JSONUtil.jsonToMap(streamJSONObject);
 		
-		int status = userOperator.registerUser(name, aadhaar, email, password, phone, dob);
+		ClickStreamOperator clickStreamOperator = new ClickStreamOperator();
+		int status = clickStreamOperator.registerClickStream(phone, streamMap);
 		
 		return status;
 	}
