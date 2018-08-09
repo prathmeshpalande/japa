@@ -29,6 +29,20 @@ public class LoginController {
 		return status;
 	}
 	
+	@RequestMapping(value = "/validatesignup", method = RequestMethod.POST)
+	public Object validateSignup(@RequestBody String requestBody) {
+		
+		JSONObject jsonObject = new JSONObject(requestBody);
+		
+		String phone = jsonObject.getString("phone");
+		
+		UserOperator userOperator = new UserOperator();
+		
+		Object status = userOperator.validateSignup(phone);
+		
+		return status;
+	}
+	
 	@RequestMapping(value = "/performlogin", method = RequestMethod.POST)
 	public int performLogin(@RequestBody String requestBody) {
 		

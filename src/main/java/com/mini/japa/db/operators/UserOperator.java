@@ -129,5 +129,53 @@ public class UserOperator {
 		return responseCode;
 
 	}
+	
+	public Object validateSignup(String phone) {
+		
+		Object response = 0;
+		
+		Connection conn = null;
+		try {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			conn = DriverManager.getConnection("jdbc:mysql://upay.cuadni5olhbe.us-east-2.rds.amazonaws.com:3306/upaydb", "upay", "rusprapalosw$");
+
+			System.out.println("Connection to SQLite has been established.");
+
+			String query = "select phone from users where phone = ?";
+
+			PreparedStatement preparedStmt = conn.prepareStatement(query);
+
+			preparedStmt.setString(1, phone);
+
+			ResultSet rs = preparedStmt.executeQuery();
+			
+			response= (rs.next()) ? false : true;
+			
+			preparedStmt.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			System.out.println("Error Code: " + e.getErrorCode());
+			System.out.println(e.getMessage());
+			response = e.getErrorCode();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println("Error Code: " + ex.getErrorCode());
+				System.out.println(ex.getMessage());
+				response = ex.getErrorCode();
+			}
+		}
+
+		return response;
+		
+	}
 
 }
