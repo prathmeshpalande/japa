@@ -75,4 +75,54 @@ public class PassbookOperator {
 		
 	}
 	
+	public double getBalance(String phone) {
+		
+		Connection conn = null;
+		double response = -1;
+		
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver");
+//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/upaydb", "root", "admin");
+			conn = DriverManager.getConnection("jdbc:mysql://upay.cuadni5olhbe.us-east-2.rds.amazonaws.com:3306/upaydb", "upay", "rusprapalosw$");
+			
+			String query = "select balance from users where phone = ?";
+			
+			PreparedStatement transactionHistoryPreparedStatement = conn.prepareStatement(query);
+			
+			transactionHistoryPreparedStatement.setString(1, phone);
+			
+			ResultSet rs = transactionHistoryPreparedStatement.executeQuery();
+			
+			rs.next();
+			
+			response = rs.getDouble(1);
+			
+		} catch (SQLException e) {
+			System.out.println("Error Code: " + e.getErrorCode());
+			System.out.println(e.getMessage());
+			ArrayList<String> errorList = new ArrayList<String>();
+			errorList.add("Error");
+			response = -1;
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException ex) {
+				System.out.println("Error Code: " + ex.getErrorCode());
+				System.out.println(ex.getMessage());
+				ArrayList<String> errorList = new ArrayList<String>();
+				errorList.add("Errsor");
+				response = -1;
+			}
+		}
+		
+		return response;
+		
+	}
+	
 }

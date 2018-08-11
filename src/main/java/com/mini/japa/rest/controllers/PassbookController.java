@@ -28,4 +28,19 @@ public class PassbookController {
 		return passbook;
 		
 	}
+	
+	@RequestMapping(value = "/getbalance", method = RequestMethod.POST)
+	public double getBalance(@RequestBody String requestBody) {
+				
+		JSONObject jsonObject = new JSONObject(requestBody);
+		
+		String phone = jsonObject.getString("phone");
+		
+		PassbookOperator passbookOperator = new PassbookOperator();
+		
+		double passbook = passbookOperator.getBalance(phone);
+		
+		return passbook;
+		
+	}
 }
