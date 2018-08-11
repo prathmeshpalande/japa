@@ -14,21 +14,12 @@ public class UserOperator {
 
 		Connection conn = null;
 		try {
-			// db parameters
-
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/upaydb", "root", "admin");
 			conn = DriverManager.getConnection("jdbc:mysql://upay.cuadni5olhbe.us-east-2.rds.amazonaws.com:3306/upaydb", "upay", "rusprapalosw$");
-
-//			String url = "jdbc:sqlite:D:/Softwares/SQLite DBs/MiniPaytm DB/MiniPaytmDB.db";
-//			// create a connection to the database
-//			conn = DriverManager.getConnection(url);
-
 			System.out.println("Connection to SQLite has been established.");
 
 			String query = "insert into users values (?, ?, ?, ?, ?, ?, ?)";
