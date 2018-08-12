@@ -116,7 +116,7 @@ public class PassbookOperator {
 				System.out.println("Error Code: " + ex.getErrorCode());
 				System.out.println(ex.getMessage());
 				ArrayList<String> errorList = new ArrayList<String>();
-				errorList.add("Errsor");
+				errorList.add("Error");
 				response = -1;
 			}
 		}
