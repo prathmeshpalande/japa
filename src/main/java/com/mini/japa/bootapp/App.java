@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 
 //@Configuration
-@ComponentScan({ "com.mini.japa.rest.controllers"})// "com.mini.paytm.configuration" })
+@ComponentScan({"com.mini.japa.rest.controllers"})// "com.mini.paytm.configuration" })
 //@EnableAutoConfiguration
 @SpringBootApplication
 public class App {
