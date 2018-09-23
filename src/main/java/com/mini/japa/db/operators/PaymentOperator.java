@@ -11,61 +11,73 @@ public class PaymentOperator {
 
 		int responseCode = 1;
 
-		Connection conn = null;
-		try {
+		UserOperator userOperator = new UserOperator();
 
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://upay.cuadni5olhbe.us-east-2.rds.amazonaws.com:3306/upaydb", "upay", "rusprapalosw$");
+		Object doesToPhoneExist = userOperator.validateSignup(toPhone);
+		if ((boolean) doesToPhoneExist) {
 
-			CallableStatement statement = conn.prepareCall("{call performtransaction(?, ?, ?)}");
-
-			statement.setString(1, fromPhone);
-			statement.setString(2, toPhone);
-			statement.setDouble(3, amount);
-
-			statement.execute();
-						
-			statement.close();
-
-		} catch (SQLException e) {
-			System.out.println("Error Code: " + e.getErrorCode());
-			System.out.println(e.getMessage());
-			responseCode = e.getErrorCode();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} finally {
+			Connection conn = null;
 			try {
-				if (conn != null) {
-					conn.close();
+
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(
+						"jdbc:mysql://upay.cuadni5olhbe.us-east-2.rds.amazonaws.com:3306/upaydb", "upay",
+						"rusprapalosw$");
+
+				CallableStatement statement = conn.prepareCall("{call performtransaction(?, ?, ?)}");
+
+				statement.setString(1, fromPhone);
+				statement.setString(2, toPhone);
+				statement.setDouble(3, amount);
+
+				statement.execute();
+
+				statement.close();
+
+			} catch (SQLException e) {
+				System.out.println("Error Code: " + e.getErrorCode());
+				System.out.println(e.getMessage());
+				responseCode = e.getErrorCode();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (conn != null) {
+						conn.close();
+					}
+				} catch (SQLException ex) {
+					System.out.println("Error Code: " + ex.getErrorCode());
+					System.out.println(ex.getMessage());
+					responseCode = ex.getErrorCode();
 				}
-			} catch (SQLException ex) {
-				System.out.println("Error Code: " + ex.getErrorCode());
-				System.out.println(ex.getMessage());
-				responseCode = ex.getErrorCode();
 			}
+
+			return responseCode;
 		}
-
-		return responseCode;
-
+		else {
+			responseCode = -1;
+			return responseCode;
+		}
 	}
-	
+
 	public int addMoney(String toPhone, double amount) {
-		
+
 		int responseCode = 1;
-		
+
 		Connection conn = null;
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://upay.cuadni5olhbe.us-east-2.rds.amazonaws.com:3306/upaydb", "upay", "rusprapalosw$");
-			
+			conn = DriverManager.getConnection("jdbc:mysql://upay.cuadni5olhbe.us-east-2.rds.amazonaws.com:3306/upaydb",
+					"upay", "rusprapalosw$");
+
 			CallableStatement statement = conn.prepareCall("{call performaddmoney(?, ?)}");
 
 			statement.setString(1, toPhone);
 			statement.setDouble(2, amount);
 
 			statement.execute();
-			
+
 		} catch (SQLException e) {
 			System.out.println("Error Code: " + e.getErrorCode());
 			System.out.println(e.getMessage());
@@ -83,9 +95,9 @@ public class PaymentOperator {
 				responseCode = ex.getErrorCode();
 			}
 		}
-		
+
 		return responseCode;
-		
+
 	}
 
 }

@@ -57,4 +57,18 @@ public class LoginController {
 		
 		return status;
 	}
+	
+	@RequestMapping(value = "/getprofile", method = RequestMethod.POST)
+	public Object getProfile(@RequestBody String requestBody) {
+		
+		JSONObject jsonObject = new JSONObject(requestBody);
+		
+		String phone = jsonObject.getString("phone");
+		
+		UserOperator userOperator = new UserOperator();
+		
+		Object response = userOperator.getProfile(phone);
+		
+		return response;
+	}
 }

@@ -162,5 +162,11 @@ public class UserOperator {
 		return response;
 		
 	}
+	
+	public Object getProfile(String phone) {
+		
+		return true;
+		
+	}
 
 }
