@@ -13,8 +13,12 @@ public class PaymentOperator {
 
 		UserOperator userOperator = new UserOperator();
 
-		Object doesToPhoneExist = userOperator.validateSignup(toPhone);
-		if ((boolean) doesToPhoneExist) {
+		
+		Object doesNotToPhoneExist = userOperator.validateSignup(toPhone);
+		
+		System.out.println("DOES USER NOT EXIST: " + doesNotToPhoneExist);
+
+		if (!(boolean) doesNotToPhoneExist) {
 
 			Connection conn = null;
 			try {

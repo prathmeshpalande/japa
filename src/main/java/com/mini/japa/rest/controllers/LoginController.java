@@ -1,5 +1,7 @@
 package com.mini.japa.rest.controllers;
 
+import java.util.Map;
+
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +61,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/getprofile", method = RequestMethod.POST)
-	public Object getProfile(@RequestBody String requestBody) {
+	public Map<String, Object> getProfile(@RequestBody String requestBody) {
 		
 		JSONObject jsonObject = new JSONObject(requestBody);
 		
@@ -67,7 +69,23 @@ public class LoginController {
 		
 		UserOperator userOperator = new UserOperator();
 		
-		Object response = userOperator.getProfile(phone);
+		Map<String, Object> response = userOperator.getProfile(phone);
+		
+		return response;
+	}
+	
+	@RequestMapping(value = "/reset_password", method = RequestMethod.POST)
+	public Map<String, Object> resetPassword(@RequestBody String requestBody) {
+		
+		JSONObject jsonObject = new JSONObject(requestBody);
+		
+		String phone = jsonObject.getString("phone");
+		String oldPassword = jsonObject.getString("old_password");
+		String newPassword = jsonObject.getString("new_password");
+		
+		UserOperator userOperator = new UserOperator();
+		
+		Map<String, Object> response = userOperator.resetPassword(phone, oldPassword, newPassword);
 		
 		return response;
 	}
