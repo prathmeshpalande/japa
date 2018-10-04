@@ -5,7 +5,7 @@
 
 	<groupId>com.mini</groupId>
 	<artifactId>japa</artifactId>
-	<version>1.3.3-RELEASE</version>
+	<version>1.4.1-RELEASE</version>
 	<packaging>jar</packaging>
 
 	<name>japa</name>
